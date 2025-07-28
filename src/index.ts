@@ -96,7 +96,7 @@ async function update(clientOptions: ClientOptions, newRecord: AddressableRecord
 	const comment = currentRecord.comment;
 
 	await cloudflare.dns.records.update(records[0].id, {
-		content: newRecord.content,
+		content: request.headers.get('CF-Connecting-IP'),
 		zone_id: zone.id,
 		name: newRecord.name as any,
 		type: newRecord.type,
@@ -104,7 +104,7 @@ async function update(clientOptions: ClientOptions, newRecord: AddressableRecord
 		comment, // Pass the existing "comment"
 	});
 
-	console.log('DNS record for ' + newRecord.name + '(' + newRecord.type + ') updated successfully to ' + newRecord.content);
+	console.log('DNS record for ' + newRecord.name + '(' + newRecord.type + ') updated successfully to ' + request.headers.get('CF-Connecting-IP');
 
 	return new Response('OK', { status: 200 });
 }
