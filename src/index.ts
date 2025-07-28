@@ -104,7 +104,7 @@ async function update(clientOptions: ClientOptions, newRecord: AddressableRecord
 		comment, // Pass the existing "comment"
 	});
 
-	console.log('DNS record for ' + newRecord.name + '(' + newRecord.type + ') updated successfully to ' + request.headers.get('CF-Connecting-IP');
+	console.log('DNS record for ' + newRecord.name + '(' + newRecord.type + ') updated successfully to ' + request.headers.get('CF-Connecting-IP'));
 
 	return new Response('OK', { status: 200 });
 }
